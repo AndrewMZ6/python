@@ -72,3 +72,39 @@ p.switch()
 # the FairyLights is turned off
 # the Lightbulb is turned on
 # the Lightbulb is turned off
+
+
+"""
+Without dependency injection - direct dependency
+"""
+
+
+class BadPowerSwitcher:
+    def __init__(self) -> None:
+        self.turned_on = False
+
+    def switch(self) -> None:
+        # Direct depencency, BadPowerSwitcher class is tightly coupled to
+        # Lightbulb class
+        l = Lightbulb()
+        if self.turned_on:
+            l.turn_off()
+            self.turned_on = False
+        else:
+            l.turn_on()
+            self.turned_on = True
+
+
+bps = BadPowerSwitcher()
+bps.switch()
+bps.switch()
+
+
+# OUTPUT:
+
+# the FairyLights is turned on
+# the FairyLights is turned off
+# the Lightbulb is turned on
+# the Lightbulb is turned off
+# the Lightbulb is turned on
+# the Lightbulb is turned off
