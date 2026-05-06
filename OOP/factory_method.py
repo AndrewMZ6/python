@@ -62,6 +62,86 @@ class CreatorOfProductsWithRedRibbon(Creator):
         return red_ribboned_product
 
 
+# ---------------------- Logistics example ------------------
+
+
+"""
+Good example of the usage of the "Factory" design pattern is shown on https://refactoring.guru/design-patterns/factory-method
+
+The idea is having Logistics class that is responsible for logistics in general
+and then had various implementations of Logistics depending on the road chosen - 
+by land, by sea, on rails, etc.
+"""
+
+
+class Transport(ABC):
+    """
+    Interface for all transport object to have
+    """
+
+    @abstractmethod
+    def deliver(self):
+        """
+        Describes how to deliver cargo from one place to another
+        """
+
+
+class Logistics(ABC):
+    """
+    Factory blueprint
+    """
+
+    @abstractmethod
+    def create_transport(self) -> Transport: ...
+
+    def plan_delivery(self, t: Transport):
+        self.process(t)
+
+
+class Ship(Transport):
+    """
+    Implementation of sea transport. It is guaranteed to have 'deliver' method
+    """
+
+    def deliver(self):
+        return "A guide how to deliver cargo by sea"
+
+
+class Truck(Transport):
+    """
+    Implementation of road transport.
+    """
+
+    def deliver(self):
+        return "A GPS list of points of the road"
+
+
+class SeaLogistics(Logistics):
+    """
+    Implementation of Factory for sea transport
+    """
+
+    def create_transport(self):
+        return Ship()
+
+
+class RoadLogistics(Logistics):
+    """
+    Implementation of Factory for road transport
+    """
+
+    def create_transport(self):
+        return Truck()
+
+
 if __name__ == "__main__":
     red_ribbon_factory = CreatorOfProductsWithRedRibbon()
     red_ribbon_factory.operation()
+
+    road_factory = RoadLogistics()
+    t = road_factory.create_transport()
+    print(t.deliver())
+
+    sea_factory = SeaLogistics()
+    s = sea_factory.create_transport()
+    print(s.deliver())
