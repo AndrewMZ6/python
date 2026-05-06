@@ -3,6 +3,9 @@ Why is it needed?
 
 To reduce coupling between creation of objects and their concrete classes.
 Wiki article https://en.wikipedia.org/wiki/Factory_method_pattern
+
+Factory method separates product construction code from the code that actually uses
+the product
 """
 
 from abc import ABC, abstractmethod
@@ -132,6 +135,18 @@ class RoadLogistics(Logistics):
 
     def create_transport(self):
         return Truck()
+
+
+# ------------------- Dialogue UI example
+
+
+"""
+The example shows how to use "Factory" design pattern in case of UI
+
+Idea:
+    You don't need to rewrite dialogue window rendering logic for Windows, Linux and for Browser (HTML)
+    as long as UI elements (e.g. button) implement the same interface as the other
+"""
 
 
 if __name__ == "__main__":
