@@ -3,9 +3,12 @@ from abc import ABC, abstractmethod
 """
 From wikipedia:
 
-In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled software modules. When following this principle, 
-the conventional dependency relationships established from high-level, policy-setting modules to low-level, dependency modules are reversed, 
-thus rendering high-level modules independent of the low-level module implementation details. The principle states:
+In object-oriented design, the dependency inversion principle is a specific methodology
+for loosely coupled software modules. When following this principle, 
+the conventional dependency relationships established from high-level, 
+policy-setting modules to low-level, dependency modules are reversed, 
+thus rendering high-level modules independent of the low-level module 
+implementation details. The principle states:
 
 1. High-level modules should not import anything from low-level modules. Both should depend on abstractions (e.g., interfaces).
 2. Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
@@ -14,7 +17,69 @@ By dictating that both high-level and low-level objects must depend on the same 
 """
 
 
+# ------------------ Conventional dependency relationships ---------------------------
+
+
+# Conventional dependency relationships (before applying Dependency Inversion)
+# mean that high-level modules directly depend on low-level modules. For example
+
+
+class UserService:  # this is high-level module
+    def __init__(self):
+        self.db = PostgresDatabase()  # this is low-level details
+
+    def get_user(self, user_id):
+        user = self.db.query(f"SELECT * FROM users WHERE id={user_id}")
+        return user
+
+
+# 1. "UserService" owns / knows about "PostgresDatabase"
+# 2. Switching from Postgres to MySQL database or MongoDB requires changing "UserService" class
+# 3. Can't use mocks for testing
+
+
+# ------------------------------- And now enter DI! -----------------------------------
+
+
+class UserRepository(ABC):  # interface
+    @abstractmethod
+    def get_user(self, user_id): ...
+
+
+class PostgreSqlUserRepository(UserRepository):  # low-level depends on the interface
+    def get_user(self, user_id):
+        "PostgreSQL query code"
+        pass
+
+
+class UserService:
+    def __init__(self, repo: UserRepository):  # depends on abstraction / interface
+        self.repo = repo
+
+    def get_user(self, user_id):
+        return self.db.get_user(user_id)
+
+
+# High-level module "UserService" depends on abtraction "UserRepository"
+# Low-level module "PostgreSqlUserRepository" ALSO depends on abtraction "UserRepository"
+# Adding another low-level module, e.g. "MySqlUserRepository" is now easier
+
+
+class MySqlUserRepository(UserRepository):
+    def get_user(self, user_id):
+        "MySQL query code"
+        pass
+
+
+# ------------------------------- another example --------------------------------------
+#                           Lightbulb and FairyLights(гирлянда)
+
+
 class Switchable(ABC):
+    """
+    Interface for dependency object
+    """
+
     @abstractmethod
     def turn_on(self):
         """Turns on the Switchable object"""
@@ -41,7 +106,9 @@ class FairyLights(Switchable):
 
 
 class PowerSwitcher:
-    def __init__(self, l: Switchable) -> None:
+    def __init__(
+        self, l: Switchable
+    ) -> None:  # depends on the interface, not implementation
         self.l = l
         self.turned_on = False
 
