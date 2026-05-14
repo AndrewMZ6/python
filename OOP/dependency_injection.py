@@ -175,3 +175,13 @@ bps.switch()
 # the Lightbulb is turned off
 # the Lightbulb is turned on
 # the Lightbulb is turned off
+
+
+
+
+"""
+I've confused dependency injection (DI) and dependency inversion principle (DIP). They are different in the sense of
+area:
+    DIP is a principle, recomendation on how to depouple modules while 
+    DI is a technique implementing the principle
+"""
