@@ -1,19 +1,18 @@
 # Experimenting with changing list inbuilt functionality
 
+
 class Mylist(list):
     def __init__(self, L: list):
         super().__init__(L)
 
     def __add__(self, other):
         try:
-            return Mylist([i+j for i, j in zip(self, other, strict = True)])
+            return Mylist([i + j for i, j in zip(self, other, strict=True)])
         except ValueError:
             raise ValueError("Input Arguments must be the same length")
 
     def isunique(self):
         return len(set(self)) == len(self)
-
-
 
 
 L2 = Mylist([7, 4, 11, 9, 3])

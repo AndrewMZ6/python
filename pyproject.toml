@@ -5,6 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "graphviz>=0.21",
+    "pipdeptree>=4.2.0",
     "ruff>=0.15.12",
     "ty>=0.0.34",
+]
+
+[tool.uv.workspace]
+members = [
+    "parallelism/concurrency",
 ]

@@ -9,24 +9,26 @@ from func_module import my_gen
 
 L = []
 
+
 def thr(n, name):
-	for i in my_gen(n):
-		L.append(f"{str(name + 1)} thread::{i}")
-	print(f"thread {name} is done!")
+    for i in my_gen(n):
+        L.append(f"{str(name + 1)} thread::{i}")
+    print(f"thread {name} is done!")
+
 
 threads = []
 for _ in range(4):
-	t = Thread(target=thr, args=(25, _))
-	t.start()
-	threads.append(t)
+    t = Thread(target=thr, args=(25, _))
+    t.start()
+    threads.append(t)
 
 
 for thread in threads:
-	thread.join()
+    thread.join()
 
 print(len(L))
 for i in L:
-	print(i)
+    print(i)
 
 
 # output:

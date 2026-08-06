@@ -1,10 +1,12 @@
 # example of closure using lambda function
 
-def make_y(a: float , b: float, c: float):
-	# values of variables a, b, c are saved
-	# inside returned lambda function
-  
-	return lambda x: a*(x**2) + b*x + c
+
+def make_y(a: float, b: float, c: float):
+    # values of variables a, b, c are saved
+    # inside returned lambda function
+
+    return lambda x: a * (x**2) + b * x + c
+
 
 y = make_y(7, -2, 3)
 

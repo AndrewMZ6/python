@@ -1,14 +1,13 @@
 """
 Why does this module exist?
-It's a collection of tolls - functions that 
+It's a collection of tolls - functions that
 """
 
 from functools import partial
 
 
-def exponential_function(base: int, power: int):
-    return base ** power
-
+def exponential_function(base: int, power: int) -> int:
+    return base**power
 
 
 # two to the power of 1, 2, 3, 4
@@ -34,7 +33,6 @@ print(two_base(1))
 print(two_base(2))
 print(two_base(3))
 print(two_base(4))
-
 
 
 # OUTPUT:

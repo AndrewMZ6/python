@@ -4,45 +4,47 @@
 import asyncio
 import time
 
+
 def queue_time(customers, n):
-    start = time.time()   
+    start = time.time()
     x = 0
+
     async def coro():
         nonlocal customers
         nonlocal x
         x += 1
         y = x
         while customers:
-        	print(f"coroutine number: {y}")
-        	print(f"customers list: {customers}")
-        	t = customers.pop(0)
-        	print(f"poped value from customers: {t}")
-        	await asyncio.sleep(t)
-    
+            print(f"coroutine number: {y}")
+            print(f"customers list: {customers}")
+            t = customers.pop(0)
+            print(f"poped value from customers: {t}")
+            await asyncio.sleep(t)
+
     tasks = (coro() for _ in range(n))
-    
+
     async def main():
         await asyncio.gather(*tasks)
-        
+
     asyncio.run(main())
-    
-    stop = time.time()    
+
+    stop = time.time()
     x = 0
     return int(stop - start)
 
 
 print("case: queue_time([], 1)")
-print(f"resut: {queue_time([], 1)}", end="\n\n")			# expected 0
+print(f"resut: {queue_time([], 1)}", end="\n\n")  # expected 0
 print("case: queue_time([5], 1)")
-print(f"resut: {queue_time([5], 1)}", end="\n\n")			# expected 5
+print(f"resut: {queue_time([5], 1)}", end="\n\n")  # expected 5
 print("case: queue_time([2], 5)")
-print(f"resut: {queue_time([2], 5)}", end="\n\n")			# expected 2 
+print(f"resut: {queue_time([2], 5)}", end="\n\n")  # expected 2
 print("case: queue_time([1,2,3,4,5], 1)")
-print(f"resut: {queue_time([1,2,3,4,5], 1)}", end="\n\n")	# expected 15
+print(f"resut: {queue_time([1, 2, 3, 4, 5], 1)}", end="\n\n")  # expected 15
 print("case: queue_time([1,2,3,4,5], 100)")
-print(f"resut: {queue_time([1,2,3,4,5], 100)}", end="\n\n")	# expected 5 
+print(f"resut: {queue_time([1, 2, 3, 4, 5], 100)}", end="\n\n")  # expected 5
 print("case: queue_time([2,2,3,3,4,4], 2)")
-print(f"resut: {queue_time([2,2,3,3,4,4], 2)}", end="\n\n")	# expected 9 
+print(f"resut: {queue_time([2, 2, 3, 3, 4, 4], 2)}", end="\n\n")  # expected 9
 
 # OUTPUT:
 # case: queue_time([], 1)

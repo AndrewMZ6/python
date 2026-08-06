@@ -1,4 +1,4 @@
-# Testing execution time of generating 1x10000000 size list 
+# Testing execution time of generating 1x10000000 size list
 # of random int numbers in range 1 to 100000 using:
 #   1. Initially empty list, append in for loop
 #   2. List comprehention
@@ -36,7 +36,9 @@ npm = np.max(nplist)
 np_end_time = time.time()
 
 
-print(f"for loop exec time:{py_forloop_end_time - py_forloop_start_time:.2f}. Max is {form}")
+print(
+    f"for loop exec time:{py_forloop_end_time - py_forloop_start_time:.2f}. Max is {form}"
+)
 print(f"list comprehension exec time:{py_end_time - py_start_time:.2f}. Max is {m}")
 print(f"numpy exec time:{np_end_time - np_start_time:.2f}. Max is {npm}")
 
