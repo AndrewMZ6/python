@@ -16,31 +16,32 @@ type(obj).__getattribute__(obj, "attr")     ← always
 
 """
 
-
 from typing import Any
 
 
 class A:
-    class_attribute = 'minecraft'
+    class_attribute = "minecraft"
+
     def __getattribute__(self, name: str) -> Any:
-        print(f'accssing __getattribute__ with name -> {name}')
-        if name == 'flare':
+        print(f"{self} calling __getattribute__ with argument -> {name}")
+        if name == "flare":
             return 46
         return super().__getattribute__(name)
 
     def __new__(cls):
-        print(f'access __new__ with class {cls}')
+        print(f"{cls} class accessing __new__")
         return super().__new__(cls)
 
-    def __getattr__(self, name: str) -> int | None:
-        print(f'accssing __getattr__ with name -> {name}')
-        return 777 if name == 'justice' else None
-
+    def __getattr__(self, name) -> int:
+        print(f"{self} accessing __getattr__ with argument {name}")
+        if name == "justice":
+            return 7778
+        raise AttributeError(
+            f"'{self.__class__.__name__}' object - has no attribute '{name}'"
+        )
 
 
 a = A()
 print(a.flare)
 print(a.justice)
 print(a.blossom)
-
-
