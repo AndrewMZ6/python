@@ -19,3 +19,8 @@ def test_fly_sum(_fly):
 
 def test_approxx():
     assert 1 == pytest.approx(0.9999999)
+
+
+@pytest.mark.parametrize("a, b, result", [(1, 2, 3), (78, 2, 80)])
+def test_summation(a, b, result):
+    assert a + b == result
