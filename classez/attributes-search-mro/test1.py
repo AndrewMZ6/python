@@ -39,9 +39,3 @@ class A:
         raise AttributeError(
             f"'{self.__class__.__name__}' object - has no attribute '{name}'"
         )
-
-
-a = A()
-print(a.flare)
-print(a.justice)
-print(a.blossom)
