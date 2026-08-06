@@ -1,5 +1,19 @@
 """
 Experimenting with attribute lookup in python
+
+obj.attr
+   │
+   ▼
+type(obj).__getattribute__(obj, "attr")     ← always
+   │
+   ├─ (default implementation)
+   │     ├─ data descriptor?
+   │     ├─ instance.__dict__?
+   │     ├─ non-data descriptor?
+   │     └─ class attribute?
+   │
+   └─ if AttributeError → __getattr__ (if defined)
+
 """
 
 
@@ -7,11 +21,26 @@ from typing import Any
 
 
 class A:
+    class_attribute = 'minecraft'
     def __getattribute__(self, name: str) -> Any:
+        print(f'accssing __getattribute__ with name -> {name}')
         if name == 'flare':
             return 46
         return super().__getattribute__(name)
 
+    def __new__(cls):
+        print(f'access __new__ with class {cls}')
+        return super().__new__(cls)
+
+    def __getattr__(self, name: str) -> int | None:
+        print(f'accssing __getattr__ with name -> {name}')
+        return 777 if name == 'justice' else None
+
+
 
 a = A()
-print(a.t)
+print(a.flare)
+print(a.justice)
+print(a.blossom)
+
+
