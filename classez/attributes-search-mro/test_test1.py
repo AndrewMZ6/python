@@ -4,8 +4,9 @@ from test1 import A
 
 
 class MyTest(unittest.TestCase):
-    def setUp(self) -> None:
-        self.a = A()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.a = A()
     
     def test_one(self):
         self.assertEqual(self.a.flare, 46)
