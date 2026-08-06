@@ -4,7 +4,7 @@ from func_module import my_gen
 
 L = []
 for i in my_gen(100):
-	L.append(i)
-  
+    L.append(i)
+
 # output:
 # [Finished in 9.4s]

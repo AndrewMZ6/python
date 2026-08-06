@@ -1,14 +1,13 @@
-
 def myfunc(*args, **kwargs):
 
-    print('args: ', args)
-    print(type(args))           # args - это кортеж, его можно индексировать
+    print("args: ", args)
+    print(type(args))  # args - это кортеж, его можно индексировать
 
-    print('kwargs: ', kwargs)
-    print(type(kwargs))             # kwargs - это словарь
+    print("kwargs: ", kwargs)
+    print(type(kwargs))  # kwargs - это словарь
 
     for o in range(len(kwargs)):
-        print(kwargs[list(kwargs)[o]])   
+        print(kwargs[list(kwargs)[o]])
 
     #   Пример "листизации" словаря:
     #
