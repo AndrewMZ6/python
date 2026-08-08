@@ -1,15 +1,15 @@
 import unittest
 
-from test1 import A
+from main import ClassUnderTesting
 
 
 class MyTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.a = A()
+        cls.a = ClassUnderTesting()
 
     def test_one(self):
-        self.assertEqual(self.a.flare, 46)
+        self.assertEqual(self.a.year_made, 1976)
 
     def test_two(self):
         self.assertEqual(self.a.justice, 7778)
